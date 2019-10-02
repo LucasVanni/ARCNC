@@ -33,11 +33,28 @@ const app = express();
 
 /*
 
-	Como primeiro parâmetro é necessário a rota do usuário (Rota é tudo aquilo que é encontrado depois da primeira barra / no navegador).
-
+	Como primeiro parâmetro é a rota do usuário (Rota é tudo aquilo que é encontrado depois da primeira barra / no navegador).
+	
+	Entre aspas coloca-se qual a rota quero acessar...
+	
 	Quando está apenas com a barra, "/", é como se fosse se estivessemos ouvindo qunado o usuário está tentado acessar apenas pelo endereço localhost/3333.
 
-	Como segundo parãmetro, é uma função anônima que recebe dois parânetros. Sempre recebe como parâmetros, request (requisição -> Com ele é possível pegar qualquer tipo de parâmetro que o usuário esteja enviando nessa requisição) e response, 
+	Como segundo parãmetro, é uma função que recebe sempre dois parânetros 
+	--> request (requisição -> Com ele é possível pegar qualquer tipo de parâmetro que o usuário esteja enviando nessa requisição)
+		Pense em uma rota de produtos / criação de pedidos / fechamento de compra => No request eu irei capturar as informações de quais produtos 
+			estão no carrinho do usuário, a quantidade desses produtos, qual foi o valor do frete, enfim todas as informações que o usuário
+			está enviando para a requisição...
+			
+	--> response -> Serve para devolver uma resposta para a requisição, se nada for introduzido ele irá ficar esperando a resposta,
+		e ficará executando e não irá devolver nada ao cliente (navegador)... Para isso temos que implementar o retorno da resposta(response).
+		
+		
+		"return response." -> teremos vários tipos de respostas... 
+		
+		A resposta mais simples possível é o método send, que irá enviar um texto como resposta...
+		
+		return response.send("Hello World");
+	
 
 
 */
