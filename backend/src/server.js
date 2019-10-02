@@ -26,6 +26,14 @@
 */
 const express = require("express");
 
+/*
+	O express é micro-framework dentro do node...
+
+	Ajuda a obter definições de rotas com o método get...
+
+	Framework --> Conjunto de funcionalidades prontas, para não ter que fazer tudo do zero...
+*/
+
 // Cria a aplicação
 const app = express();
 
@@ -51,15 +59,45 @@ const app = express();
 		
 		"return response." -> teremos vários tipos de respostas... 
 		
-		A resposta mais simples possível é o método send, que irá enviar um texto como resposta...
+		A resposta mais simples possível é o método send, que envia um texto como resposta...
 		
 		return response.send("Hello World");
-	
 
+
+			Como estamos desenvolvendo uma api rest, que é um serviço que irá disponibilizar dados para o frontend, seja ele em React/React-Native, nós nunca iremos devolver uma resposta na forma de texto, temos que utilizar uma estrutura de dados(É um formato que conseguimos enviar e receber dados, de forma que tanto o backend quanto o frontend consegue interpretar, entender, manipular os dados da melhor forma possível)
+			O padrão mais utilizado atualmente é o JSON (JavaScript Object Notation / Notação de Objeto em JavaScript). Ele aceita tanto objetos literais quanto arrays.
+
+			Para mudar o estilo de ver o JSON na página web é utilizado o JSON Viewer
+
+			Se quiser que o servidor reinicie toda vez que fizermos uma alteração, é necessário instalar a dependencia chamada de nodemon( yarn add nodemon -D )
+
+			A flag "-D" informa para o projeto que essa dependência será utilizada somente no ambiente de desenvolvimento, sendo descartada no ambiente de produção, será utilizado o node mesmo, pois o projeto não precisará ficar ouvindo alterações
+
+			"devDependencies" significa -> dependências que serão utilizadas somente quando estivermos em desenvolvimento...
+
+
+			"scripts": {
+				"dev": "nodemon src/server.js"
+			}
+
+			É usado para dizer que o comando "yarn dev" deverá executar os comandos nodemon src/server.js
+
+			Se estiver utilizando o npm, o comando a ser inserido no terminal é "npm run dev"
+
+			Além do método get, existem outros que podemos utilizar...
+			Dentre os métodos mais importantes estão:
+
+			Get -> Método utilizado para buscar algo no backend...
+
+			Post
+			
+			Put
+			
+			Delete
 
 */
 app.get("/", (request, response) => {
-	return response.json({ message: "Hello Oministeck" });
+	return response.json({ message: "Hello React" });
 });
 
 /* 
