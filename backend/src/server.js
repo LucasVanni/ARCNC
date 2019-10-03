@@ -87,17 +87,91 @@ const app = express();
 			Além do método get, existem outros que podemos utilizar...
 			Dentre os métodos mais importantes estão:
 
-			Get -> Método utilizado para buscar algo no backend...
+			Get (Buscar) -> Método utilizado para buscar informações no backend... Pense que precisamos de uma listagem dos usuários da aplicação, para isso é necessário utilizar o método Get na rota...
 
-			Post
+			Post (Criar) -> Método utilizado para criar uma nova informação no backend, por exemplo um cadastro de usuário...
 			
-			Put
+			Put (Alterar) -> Método utilizado para informar ao backend que queremos editar alguma informação, por exemplo editar um usuário
 			
-			Delete
+			Delete (Deletar) -> Método utilizado para deletar uma informação...
 
-*/
+			Mais um detalhe: Rotas do tipo Post, não conseguimos executá-las pelo navegador, por que... Por padrão quando o navegador vai acessar uma rota da aplicação, ele sempre irá executar um método Get 
+
+				Por isso é necessário outra ferramenta para conseguirmos testar as rotas que estão utilizando outros métodos que não são get, e é claro que usaremos a mesma ferramenta para utilizar o get... Com o objetivo de centralizar tudo em uma única ferramenta e não precisarmos utilizar o navegador...
+
+			Essa ferramenta recebe o nome de Insomnia
+
+			Para sistemas 64 bits --> Insomnia
+
+			Para sistemas 32 bits --> Postman
+
+			Para criar um request novo, abra o Insomnia clique no mais, e vá até New Request, e então digite o nome do request
+
+// EXEMPLO ==> Pegando informações
 app.get("/", (request, response) => {
 	return response.json({ message: "Hello React" });
+});
+
+
+// EXEMPLO ==> Criando usuários
+app.post("/users", (request, response) => {
+	return response.json({ message: "Hello Omnisteck" });
+});
+
+		Se tentar executar com outro método, não irá funcionar, pois o app.método, só escuta esse tipo de método no momento da requisição...
+
+		Temos várias maneiras de enviar parâmetros/informações para nosso backend...
+
+		Quando estamos utilizando o método get, a maneira mais tradicional de enviar algum tipo de parâmetro, é através dos query params (são parâmetros introduzidos na url), por exemplo listar a idade usuários...
+		
+				O comando na url seria mais ou menos isso:
+
+					http://localhost:3333/users?idade=20
+
+				Geralmente os parâmetros são colocados na rota get para informar algum tipo de filtro, 
+
+				Para testes é possível colocar o parâmetro, tanto na url, quanto na aba Query (New name New Value)
+
+				Para a api pegar o parâmetro é necessário utilizar o request que é onde temos todas as informações da rota
+
+// EXEMPLO ==> Pegando parêmetros
+app.get("/users", (request, response) => {
+	// request.query => Acessar parametros da query ( para filtros)
+	return response.json({ idade: request.query.idade });
+});
+
+
+	Os query params são utilizados mais para filtrar, para enviar parâmetros que irão ficar expostos na url da aplicação...
+
+	Quando fazemos uma requisição do tipo post ou put
+ (editar ou criar um usuário), a primeira coisa que devemos fazer é informar qual usuário queremos alterar 
+
+	No caso do método put e do delete, devemos informar qual será o usuário que queremos deletar ou alterar informações (editar) sendo assim é utilizada um tipo de parâmetro que é denominado "route params" (Vai dentro da url)...
+
+	Por exemplo, quero editar um usuário com o id 1
+
+	Método put "http://localhost/users/1"
+
+	Para capturar o dado passado como parametro pela query params:
+	
+	É necessário informar na string da rota que depois da rota usuário terei uma informação, no caso do exemplo é o id do usuário
+ 
+	// EXEMPLO ==> Pegando parêmetros
+app.put("/users/:id", (request, response) => {
+	// request.params => Acessar parametros da rota (para edição e deletar)
+	return response.json({ id: request.params.id });
+});
+
+	
+	
+
+
+*/
+
+// EXEMPLO ==> Pegando parêmetros
+app.put("/users/:id", (request, response) => {
+	// request.params => Acessar parametros da rota
+	return response.json({ id: request.params.id });
 });
 
 /* 
