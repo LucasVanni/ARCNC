@@ -12,6 +12,11 @@ module.exports = {
 			date,
 		});
 
+		await booking
+			.populate("spot")
+			.populate("user")
+			.execPopulate();
+
 		return response.json(booking);
 	},
 };
