@@ -7,6 +7,10 @@ const routes = require("./routes");
 
 const mongoose = require("mongoose");
 
+const cors = require("cors");
+
+const path = require("path");
+
 const app = express();
 
 /*
@@ -44,7 +48,10 @@ mongoose.connect(
     */
 );
 
+app.use(cors());
 app.use(express.json());
+
+app.use("/files", express.static(path.resolve(__dirname, "..", "uploads")));
 
 // Precisa vir depois do express.json(), se não irá funcionar, pois ele lê sequêncialmente
 app.use(routes);
